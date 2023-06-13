@@ -13,11 +13,13 @@ SubProceso suerte(moneda,tipeado Por Valor)
 	Definir num,cara Como Entero;
 	Escribir ("Elegi: 1=Cara o 2=Cruz");
 	Leer  tipeado;
+	//control de datos ingresados que sean 1 o 2 solamente
 	mientras (tipeado <> 1) y (tipeado <> 2) Hacer
 		Escribir ("Opcion no valida por favor elegi de nuevo");
 		Escribir ("Elegi: 1=Cara o 2=Cruz");
 		Leer  tipeado;
 	FinMientras
+	//funcion AZAR para determinar de que cara cae la moneda
 	cara<-azar(1);
 	si cara==0 Entonces
 		moneda<-1;
@@ -27,6 +29,7 @@ SubProceso suerte(moneda,tipeado Por Valor)
 		FinSi
 		moneda<-2;
 	FinSi
+	// mostramos la cara de la moneda
 	si moneda==1 Entonces
 		Escribir "El resulrado del azar es: Cara";
 	SiNo
@@ -34,6 +37,7 @@ SubProceso suerte(moneda,tipeado Por Valor)
 			Escribir "El resulrado del azar es: Cruz";
 		FinSi
 	FinSi
+	//comparamos la opcion ingresada con el resultado de la funcion azar para saber si el usuario adivino de que lado cayo la moneda
 	si moneda==tipeado Entonces
 		Escribir ("Felicidades ganaste!!!");
 		num<-4;
@@ -48,7 +52,7 @@ FinSubProceso
 SubProceso llenarMat(mat Por Referencia)
 	mat[azar(3),azar(3)]<-"0";
 FinSubProceso
-//SE MUERTRA LA MATRIZ AL FINAL DEL JUEGO GANADO
+//SE MUESTRA LA MATRIZ AL FINAL DEL JUEGO GANADO
 SubProceso mostrarMatGanadora(mat Por Referencia,pos Por Valor)
 	Definir i,j Como Entero;
 	Escribir "Felicidades Ganaste!!, en la posicion ",pos," Esta el tesoro!!";
@@ -60,6 +64,8 @@ SubProceso mostrarMatGanadora(mat Por Referencia,pos Por Valor)
 	FinPara
 FinSubProceso
 //SE COMPARA LA MATRIZ DEL JUEGO BUSQUEDA DEL TESORO PARA SABER EL RESULTADO
+//recorremos la matriz Hasta Que en cierta posicion se encuentre el tesoro y si se encuentra y es la posicion ingresada por el usuario
+//sale por Verdadero con un mensaje que le avisa al usuario que encontro el tesoro, sino se descuenta un intento
 SubProceso comparar(mat,pos,intentos)
 	Repetir		
 		Si pos ==1 y mat[0,0] == "0" entonces
@@ -121,7 +127,7 @@ SubProceso comparar(mat,pos,intentos)
 	Hasta Que intentos=3
 FinSubProceso
 
-//Encabezado del juego
+//Encabezado del juego tesoro
 SubProceso tesoro(mat,intentos)
 	Definir i,j,pos,posTablero como entero;
 	posTablero<-1;
@@ -133,8 +139,8 @@ SubProceso tesoro(mat,intentos)
 			mat[i,j]<-" ";
 		FinPara
 	FinPara
-	llenarMat(mat);
-	//Mostrar el tablero con las opciones de pósicion
+	llenarMat(mat); //se llama a la funcion llenarMat para ingresar el tesoro en una posicion aleatoria
+	//Mostrar el tablero con las opciones de pósiciones
 	para i<-0 Hasta 2 Con Paso 1 Hacer
 		para j<-0 hasta 2 con paso 1 Hacer
 			Escribir Sin Saltar "[",posTablero,"]"," ";
@@ -160,9 +166,9 @@ FinSubProceso
 
 /////////////////////////////// PROCESO PRINCIPAL ////////////////////////////////////////////////////
 Proceso juego
+	//Definimos variables, arreglos y matrices
 	Definir num,random,pos,intentos,i,j,tipeado,moneda Como Entero;
 	Definir mat Como Caracter;
-	
 	Definir dado1, dado2, aux como entero;
 	Definir puntosj, puntosc,cont5,cont1,contE,contT,puntos,contEsc,puntosTC,puntosTJ,enter como entero;
 	Definir arranca,trio Como Logico;
@@ -177,10 +183,13 @@ Proceso juego
 	moneda<-0;
 	tipeado<-0;
 	num<-0;
+	//ciclo mientras para mostrar el menu del juego al finalizar cada partida
+	//hasta presionar la opcion 4 para salir del programa
 	Mientras (num<>4) Hacer
-	menuPrincipal();	
+	menuPrincipal(); //llamamos la funcion menuPrincipal para mostrar el menu	
 	Escribir ("Elegi una de las 3 opciones o elegi 4 para salir del juego: ");
 	Leer num;
+		// ultilizamos el ciclo segun para que el usuario ingrese a que juego desea entrar
 		segun (num) hacer
 				1:
 					suerte(moneda,tipeado);
@@ -237,6 +246,7 @@ Proceso juego
 						para i <- 0 Hasta 4 con paso 1 Hacer
 							vectorD[i] <- Azar(6)+1;
 						FinPara
+						//ORDENAMIENTO
 						para i <-0 Hasta 3 con paso 1 Hacer
 							para j<-0 hasta 3 con paso 1 Hacer
 								si vectorD[j]>vectorD[j+1] Entonces
