@@ -32,7 +32,7 @@ SubProceso suerte(moneda,tipeado Por Valor)   //explicar la teoria de modularida
 		Leer  tipeado;
 	FinMientras
 	//funcion AZAR para determinar de que cara cae la moneda
-	cara<-azar(1);   //la funcion azar guarda los numeros entre el cero y el nro que esta entre parentesis en la variable cara
+	cara<-azar(2);   //la funcion azar guarda los numeros entre el cero y el nro que esta entre parentesis en la variable cara
 	si cara==0 Entonces    //si es cero, moneda vale uno 
 		moneda<-1;
 	SiNo 								//explicar condicionales si y sino, palabras reservadas, el si, sino, azar, leer, escribir. etc
@@ -931,14 +931,20 @@ Proceso juego  //aca definimos todas las variables que se usan para el juego y e
 					Escribir "                                                                 =       ";
 					Escribir "                                                               =   =     ";
 					Escribir "                                                              ===	  ===";
+					Escribir " ";
+					Escribir " ";
+					Escribir " ";
+					Escribir " ";
+					Escribir " ";
 					Escribir "Ahora empecemos a adivinar la palabra!!";
+					Escribir "La palabra tiene ", Longitud(palabra), " letras";
 					sum2 <-0;
 					Repetir
 						Escribir "Ingresá una letra";
 						leer letra;
 						Escribir "";
 						h <- falso; //la variable h es para descontar las vidas 
-						Escribir "La palabra tiene ", Longitud(palabra), " letras";
+						
 						
 						recorrerPalabra(palabra,letra); //subproceso1
 						
@@ -1044,4 +1050,8 @@ Proceso juego  //aca definimos todas las variables que se usan para el juego y e
 	escribir ("Gracias por jugar! Vuelva pronto!");
 	Escribir " ";
 FinProceso
+// SE AGREGA AL FINAL DEL PROYECTO LA DIRECCION DEL REPOSITORIO EN GITHUB
+// https://github.com/JuanBelich/Integrador_UTN/tree/master
+
+
 
